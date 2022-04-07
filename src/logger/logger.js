@@ -3,5 +3,3 @@ let welcome = function() {
 }
 
 module.exports.logger = welcome
-
-// hii
