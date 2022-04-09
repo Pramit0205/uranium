@@ -2,90 +2,87 @@ const express = require('express');
 
 const router = express.Router();
 
-// Problem No-1
 
-router.get('/movies', function (req, res) {
+let players =
 
-    let movies = ["solley", "RRR", "KGF", "PUSHPA", "DDL", "Attack1", "Sweety", "Bhag milkha bhag", "Damaged brain", "Avenger", "Spiderman", "Avtar"]
-res.send(movies)
-});
+   [
 
-// Problem No-2 + Problem No-3
+       {
 
-router.get('/movies/:indexNumber', function (req, res) {
+           "name": "manish",
 
-    let movies = ["solley", "RRR", "KGF", "PUSHPA", "DDL", "Attack1", "Sweety", "Bhag milkha bhag", "Damaged brain", "Avenger", "Spiderman", "Avtar"]
-    let movieIndex = req.params.indexNumber
+           "dob": "1/1/1995",
 
-    let finalMovies = " ";
-    if (movieIndex < movies.length) {
-        finalMovies = movies[movieIndex] 
-    } else {
-        finalMovies = ("Movies doesn not exist " + movies.length)
-    }
-res.send(finalMovies)
+           "gender": "male",
 
-});
+           "city": "jalandhar",
 
-// // Problem No-4 
+           "sports": [
 
-router.get('/films', function (req, res) {
+               "swimming"
 
-    let arr = [ {
-        id: 1,
-        name: "The Shining",
-       }, {
-        id: 2,
-        name: "Incendies",
-       }, {
-        id: 3,
-        name: "Rang de Basanti",
-       }, {
-        id: 4,
-        name: "Finding Nemo",
-       }]
+           ]
 
-res.send(arr)
+       },
 
-});
+       {
 
-// // Problem No-5
+           "name": "gopal",
 
-router.get('/films/:filmId', function (req, res) {
+           "dob": "1/09/1995",
 
-    let arr = [ {
-        id: 1,
-        name: "The Shining",
-       }, {
-        id: 2,
-        name: "Incendies",
-       }, {
-        id: 3,
-        name: "Rang de Basanti",
-       }, {
-        id: 4,
-        name: "Finding Nemo",
-       }]
+           "gender": "male",
+
+           "city": "delhi",
+
+           "sports": [
+
+               "soccer"
+
+           ],
+
+       },
+
+       {
+
+           "name": "lokesh",
+
+           "dob": "1/1/1990",
+
+           "gender": "male",
+
+           "city": "mumbai",
+
+           "sports": [
+
+               "soccer"
+
+           ],
+
+       },
+
+   ]
+
+
+   router.post('/players', function (req, res) {
        
-       filmIndex = req.params.filmId
+       //LOGIC WILL COME HERE
+         let x =req.body;
+         let playersName=x.name
+         for(let i=0; i<players.length; i++){
+             if(players[i].name == playersName){
+                 res.send("players Already Exists")
+             }
+         }
+         players.push(x);
+         res.send(players);
 
-       function idLookup (x) {
-        return x.id ;
-    }
-    let getId = arr.map (idLookup)
-    
-       let finalFilm = " " 
-    
-       if ( filmIndex <= getId.length ) {
-           finalFilm = arr[filmIndex-1]
-       } else {
-           finalFilm = ( "Please enter number equal to or below := " + getId.length + ", Because no movie exists with the entered id")
-       }
 
-res.send(finalFilm)
+       res.send(  { data: players , status: true }  )
 
-});
+   })
 
+ 
 
 module.exports = router;
 // adding this comment for no reason
