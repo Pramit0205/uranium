@@ -1,18 +1,40 @@
 const express = require('express');
 const router = express.Router();
-const userController= require("../controllers/userController")
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+const controller= require("../controllers/controller.js")
+const midi2= require("../auth/auth.js")
 
-router.post("/users", userController.createUser  )
+// const midi1 = function(req, res, next){
 
-router.post("/login", userController.loginUser)
+//     const header = req.headers.isfreeappuser
+//     if(header){
+//         if(header === "true")
+//         req['isFreeAppUser'] = true
+//         if(header === "false")
+//         req['isFreeAppUser'] = false
+//     next()
+//     }
+//     else res.send({msg: "An usefull header is missing"})
+//     }
 
-//The userId is sent by front end
-router.get("/users/:userId", userController.getUserData)
 
-router.put("/users/:userId", userController.updateUser)
+router.post("/createuser", controller.createUser)
+router.post("/login", controller.loginUser)
+router.get("/users/:userId", controller.getUserData)
+router.put("/users/:userId",midi2.midi1, controller.updateUser)
+router.delete("/users/:userId",midi2.midi1, controller.deleteUser)
+
+
+
+
+
+
+
+
+// router.post("/createorder", midi1, controller1.createOrder)
+// router.post("/createbatches", controller1.createbatches)
+// router.post("/createdeveloper", newcontroller.createdeveloper)
+// router.get("/scholarship-developers", newcontroller.scholarship)
+// router.get("/getdeveloper", newcontroller.getdeveloper)
 
 module.exports = router;
